@@ -12,9 +12,9 @@ public interface UserService {
 	User findOne(Long id);
 	User save(User user);
 	User delete(Long id);
-	List<User> save(List<User> users);
-	List<User> findByEmailContaining(String email);
-	List<User> findByFirstname(String firstName);
-	List<User> findByLastname(String lastName);
+	Iterable<User> save(List<User> users);
+	Page<User> findByEmailContaining(String email, int page);
+	Page<User> findByFirstname(String firstName, int page);
+	Page<User> findByLastname(String lastName, int page);
 	
 }

@@ -2,6 +2,7 @@ package jwd.wafepa.service;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -71,7 +72,8 @@ public class InMemoryUserServiceTest {
 	
 	@Test
 	public void testFindByEmailContaining() {
-		List<User> users = userService.findByEmailContaining("ka");
+		Page<User> usersPage = userService.findByEmailContaining("ka", 0);
+		List<User> users = usersPage.getContent();
 		Assert.assertNotNull(users);
 		Assert.assertEquals(2, users.size());
 		Assert.assertEquals(2L, users.get(0).getId().longValue());

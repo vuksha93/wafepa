@@ -18,12 +18,14 @@ import jwd.wafepa.service.UserService;
 public class JpaUserService 
 	implements UserService {
 	
+	private static final int PAGE_SIZE = 5;
+	
 	@Autowired
 	private UserRepository userRepository;
 
 	@Override
 	public Page<User> findAll(int page) {
-		return userRepository.findAll(new PageRequest(page, 10));
+		return userRepository.findAll(new PageRequest(page, PAGE_SIZE));
 	}
 
 	@Override
@@ -48,24 +50,23 @@ public class JpaUserService
 	}
 
 	@Override
-	public List<User> save(List<User> users) {
+	public Iterable<User> save(List<User> users) {
 		return userRepository.save(users);
 	}
-	
-//	TODO implementirati posle 
+	 
 	@Override
-	public List<User> findByEmailContaining(String email) {
-		return null;
+	public Page<User> findByEmailContaining(String email, int page) {
+		return userRepository.findByEmailContaining(email, new PageRequest(page, PAGE_SIZE));
 	}
 	
 	@Override
-	public List<User> findByFirstname(String firstName) {	
-		return userRepository.findByFirstName(firstName);
+	public Page<User> findByFirstname(String firstName, int page) {	
+		return userRepository.findByFirstName(firstName, new PageRequest(page, PAGE_SIZE));
 	}
 
 	@Override
-	public List<User> findByLastname(String lastName) {		
-		return userRepository.findByLastName(lastName);
+	public Page<User> findByLastname(String lastName, int page) {		
+		return userRepository.findByLastName(lastName, new PageRequest(page, PAGE_SIZE));
 	}
 	
 	//@PostConstruct

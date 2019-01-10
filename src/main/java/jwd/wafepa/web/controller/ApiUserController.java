@@ -37,24 +37,28 @@ public class ApiUserController {
 	private UserRegistrationDTOToUser toUserByUserRegistrationDTO;
 	
 	@RequestMapping(method=RequestMethod.GET)
-	public ResponseEntity<List<UserDTO>> getUsers(
+	public ResponseEntity<Iterable<UserDTO>> getUsers(
 			@RequestParam(defaultValue="0") int page,
 			@RequestParam(required=false) String email,
 			@RequestParam(required=false) String firstName,
 			@RequestParam(required=false) String lastName
 			) {
 		
-		Page<User> usersPage = userService.findAll(page);
-		List<User> users = usersPage.getContent(); 
+		Page<User> usersPage = null;
+		List<User> users = null;
 		
 		if(email == null && firstName == null && lastName == null) {
 			usersPage = userService.findAll(page);
 		} else if(firstName != null) {
-			users = userService.findByFirstname(firstName);
+			usersPage = userService.findByFirstname(firstName, page);
 		} else if(lastName != null) {
-			users = userService.findByLastname(lastName);
+			usersPage = userService.findByLastname(lastName, page);
 		} else if(email != null) {
-			users = userService.findByEmailContaining(email);
+			usersPage = userService.findByEmailContaining(email, page);
+		}
+
+		if (usersPage != null) {
+			users = usersPage.getContent();
 		}
 		
 		if(users == null || users.isEmpty()) {
@@ -65,14 +69,14 @@ public class ApiUserController {
 	}
 	
 	@RequestMapping(method=RequestMethod.PUT)
-	public ResponseEntity<List<UserDTO>> changeUsers(
+	public ResponseEntity<Iterable<UserDTO>> changeUsers(
 			@RequestParam(defaultValue="0") int page,
 			@RequestBody List<UserRegistrationDTO> regUsers) {
 		deleteUsers(page);
 		
 		List<User> users = toUserByUserRegistrationDTO.convert(regUsers);
 		
-		List<User> newUsers = userService.save(users);
+		Iterable<User> newUsers = userService.save(users);
 		
 		return new ResponseEntity<>(toUserDTO.convert(newUsers), HttpStatus.OK);
 	}

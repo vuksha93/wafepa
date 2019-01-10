@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 
 import jwd.wafepa.model.User;
 import jwd.wafepa.service.UserService;
@@ -60,7 +61,7 @@ public class InMemoryUserService implements UserService {
 	}
 
 	@Override
-	public List<User> findByEmailContaining(String email) {
+	public Page<User> findByEmailContaining(String email, int page) {
 		
 		List<User> retVal = new ArrayList<>();
 		
@@ -70,17 +71,17 @@ public class InMemoryUserService implements UserService {
 			}
 		}
 		
-		return retVal;
+		return new PageImpl<>(retVal);
 	}
 
 	@Override
-	public List<User> findByFirstname(String firstName) {
+	public Page<User> findByFirstname(String firstName, int page) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<User> findByLastname(String lastName) {
+	public Page<User> findByLastname(String lastName, int page) {
 		// TODO Auto-generated method stub
 		return null;
 	}

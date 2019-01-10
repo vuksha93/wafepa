@@ -1,9 +1,9 @@
 package jwd.wafepa.repository;
 
-import java.util.List;
-
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
@@ -11,16 +11,15 @@ import jwd.wafepa.model.User;
 
 @Repository
 public interface UserRepository 
-	extends JpaRepository<User, Long>{
+	extends PagingAndSortingRepository<User, Long>{
 	
-	//TODO popraviti
-	//@Query("SELECT u FROM User u WHERE u.email LIKE ?1")
-	List<User> findByEmailContaining(String email);
+	@Query("SELECT u FROM User u WHERE u.email LIKE CONCAT('%',:email,'%')")
+	Page<User> findByEmailContaining(@Param("email") String email, Pageable pageRequest);
 	
 	@Query("SELECT u FROM User u WHERE u.firstName = :firstName")
-	List<User> findByFirstName(@Param("firstName") String firstName);
+	Page<User> findByFirstName(@Param("firstName") String firstName, Pageable pageRequest);
 	
 	@Query("SELECT u FROM User u WHERE u.lastName = :lastName")
-	List<User> findByLastName(@Param("lastName") String lastName);
+	Page<User> findByLastName(@Param("lastName") String lastName, Pageable pageRequest);
 	
 }

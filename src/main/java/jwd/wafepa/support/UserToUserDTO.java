@@ -26,7 +26,7 @@ public class UserToUserDTO
 		return userDto;
 	}
 	
-	public List<UserDTO> convert(List<User> users) {
+	public Iterable<UserDTO> convert(Iterable<User> users) {
 		
 		List<UserDTO> dtoUsers = new ArrayList<>();
 		

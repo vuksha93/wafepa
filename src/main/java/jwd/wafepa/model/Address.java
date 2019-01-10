@@ -75,6 +75,7 @@ public class Address {
 		this.user = user;
 		if(!user.getAddresses().contains(this)) {
 			user.getAddresses().add(this);
+//			user.addAddress(this);
 		}
 	}
 		

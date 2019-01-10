@@ -14,6 +14,6 @@ public interface AddressRepository
 
 	List<Address> findByUserId(Long userId);
 	
-	List<User> findByUser(User user);
+	List<Address> findByUser(User user);
 	
 }

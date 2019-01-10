@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import jwd.wafepa.model.Address;
+import jwd.wafepa.model.User;
 import jwd.wafepa.repository.AddressRepository;
 import jwd.wafepa.service.AddressService;
 
@@ -67,6 +68,11 @@ public class JpaAddressService
 	@Override
 	public List<Address> findByUserId(Long userId) {
 		return addressRepository.findByUserId(userId);
+	}
+
+	@Override
+	public List<Address> findByUser(User user) {
+		return findByUserId(user.getId());
 	}
 
 }
