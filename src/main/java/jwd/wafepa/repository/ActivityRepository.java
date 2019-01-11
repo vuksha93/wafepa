@@ -12,7 +12,7 @@ import jwd.wafepa.model.Activity;
 public interface ActivityRepository 
 	extends JpaRepository<Activity, Long> {
 	
-	//@Query("select a from Activity a where a.name = :name")
+	//@Query("SELECT a FROM Activity a WHERE a.name = :name")
 	List<Activity> findByName(@Param("name") String name);
 
 }

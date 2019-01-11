@@ -33,6 +33,9 @@ public class User {
 	@OneToMany(mappedBy="user")
 	private List<Address> addresses = new ArrayList<>();
 	
+	@OneToMany(mappedBy="user")
+	private List<Record> records = new ArrayList<>();
+	
 	
 	public User() {
 		super();
@@ -108,6 +111,21 @@ public class User {
 		this.addresses.add(address);
 		if(address.getUser() != this) {
 			address.setUser(this);
+		}
+	}
+
+	public List<Record> getRecords() {
+		return records;
+	}
+
+	public void setRecords(List<Record> records) {
+		this.records = records;
+	}
+	
+	public void addRecords(Record record) {
+		this.records.add(record);
+		if(record.getUser() != this) {
+			record.setUser(this);
 		}
 	}
 	

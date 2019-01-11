@@ -2,8 +2,10 @@ package jwd.wafepa.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -24,6 +26,9 @@ public class Activity {
 	
 	@Column(name="adm_comment")
 	private String adminComment = "test";
+	
+	@OneToOne(fetch = FetchType.EAGER)
+	private Record record;
 	
 	
 	public Activity() {
@@ -79,6 +84,14 @@ public class Activity {
 
 	public void setAdminComment(String adminComment) {
 		this.adminComment = adminComment;
+	}
+
+	public Record getRecord() {
+		return record;
+	}
+
+	public void setRecord(Record record) {
+		this.record = record;
 	}
 	
 }
