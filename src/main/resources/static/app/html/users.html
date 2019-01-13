@@ -1,3 +1,23 @@
 <div ng-controller="usersCtrl">
 	<h1>Users</h1>
+	
+	<table border="1">
+		<tr>
+			<th>Email</th>
+			<th>First name</th>
+			<th>Last name</th>
+			<th>&nbsp;</th>
+			<th>&nbsp;</th>
+		</tr>
+		<tr ng-repeat="u in users">
+			<td>{{u.email}}</td>
+			<td>{{u.firstName}}</td>
+			<td>{{u.lastName}}</td>
+			<td><button ng-click="goToEdit(u.id)">Edit</button></td>
+			<td><button ng-click="deleteUser(u.id)">Delete</button></td>
+		</tr>		
+	</table>
+	
+	<button ng-click="goToAdd()">Add user</button>
+	
 </div>

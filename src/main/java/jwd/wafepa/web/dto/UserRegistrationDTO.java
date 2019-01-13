@@ -1,6 +1,5 @@
 package jwd.wafepa.web.dto;
 
-import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
@@ -13,7 +12,7 @@ public class UserRegistrationDTO {
 	@Email
 	private String email;
 	
-	@Pattern(regexp="^(?=.*[A-Z].*[A-Z])(?=.*[!@#$&*])(?=.*[0-9].*[0-9])(?=.*[a-z].*[a-z].*[a-z]).{8}$")
+	//@Pattern(regexp="^(?=.*[A-Z].*[A-Z])(?=.*[!@#$&*])(?=.*[0-9].*[0-9])(?=.*[a-z].*[a-z].*[a-z]).{8}$")
 	private String password;
 	
 	private String repeatedPassword;

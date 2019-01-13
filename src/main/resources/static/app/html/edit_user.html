@@ -1,0 +1,26 @@
+<div ng-controller="editUserCtrl">
+	<h1>Edit user</h1>
+	
+	<label>Email: </label>
+	<input ng-model="user.email"/>
+	<br/>
+	
+	<label>First name: </label>
+	<input ng-model="user.firstName"/>
+	<br/>
+	
+	<label>Last name: </label>
+	<input ng-model="user.lastName"/>
+	<br/>
+	
+	<label>Password: </label>
+	<input type="password" ng-model="user.password"/>
+	<br/>
+	
+	<label>Repeat password: </label>
+	<input type="password" ng-model="user.repeatedPassword"/>
+	<br/>
+	
+	<button ng-click="edit()">Edit</button>
+	
+</div>
