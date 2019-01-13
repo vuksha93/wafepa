@@ -13,7 +13,7 @@
 			Unesite tekst: <input ng-model="name" type="text" name="text"/>
 			<br/>
 			
-			Dugme za brisanje: <button ng-disabled="disableInsert" 
+			Dugme za brisanje: <button ng-disabled="name == ''" 
 			ng-click="deleteInsert()" 
 			type="button">Izbrisi tekst!</button>
 			<br/>

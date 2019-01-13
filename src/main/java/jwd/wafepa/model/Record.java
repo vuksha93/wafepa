@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
 
 @Entity
 @Table(name="tbl_record")
@@ -21,6 +22,7 @@ public class Record {
 	private String time;
 	
 	@Column(nullable=false, name="duration")
+	@Max(200)
 	private int duration;
 	
 	@Column(name="intensity")

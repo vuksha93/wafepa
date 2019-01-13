@@ -4,8 +4,6 @@ app.controller("appController", function($scope) {
 	
 	$scope.name = "";
 	
-	$scope.disableInsert = true;
-	
 	$scope.deleteInsert = function(){
 		
 		$scope.name = "";

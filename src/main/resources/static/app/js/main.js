@@ -18,6 +18,7 @@ wafepaApp.controller("activitiesCtrl", function($scope, $http, $location) {
 				$scope.activities = res.data;
 			},
 			function error(res) {
+				$scope.activities = [];
 				alert("Could not fetch activities!");
 			}
 		);
@@ -38,7 +39,7 @@ wafepaApp.controller("activitiesCtrl", function($scope, $http, $location) {
 		
 		$http.delete("api/activities/" + id).then(
 			function success() {
-				$location.path("/activities/delete/" + id);
+				getActivities();
 			},
 			function error() {
 				alert("Could not delete activity!");
@@ -105,6 +106,10 @@ wafepaApp.controller("addActivityCtrl", function($scope, $http, $location) {
 	
 });
 
+wafepaApp.controller("usersCtrl", function($scope) {
+	
+});
+
 wafepaApp.config(['$routeProvider', function($routeProvider) {
 	$routeProvider
 		.when('/', {
@@ -119,8 +124,8 @@ wafepaApp.config(['$routeProvider', function($routeProvider) {
 		.when('/activities/add', {
 			templateUrl : '/app/html/add_activity.html'
 		})
-		.when('/activities/delete/:id', {
-			templateUrl : '/app/html/activities.html'
+		.when('/users', {
+			templateUrl : '/app/html/users.html'
 		})
 		.otherwise({
 			redirectTo: '/'
