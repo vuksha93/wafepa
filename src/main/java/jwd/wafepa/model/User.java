@@ -3,8 +3,10 @@ package jwd.wafepa.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -16,9 +18,10 @@ public class User {
 	
 	@Id
 	@GeneratedValue
+	@Column
 	private Long id;
 	
-	@Column(nullable=false)
+	@Column(nullable=false, unique=true)
 	private String email;
 	
 	@Column(nullable=false)
@@ -33,7 +36,7 @@ public class User {
 	@OneToMany(mappedBy="user")
 	private List<Address> addresses = new ArrayList<>();
 	
-	@OneToMany(mappedBy="user")
+	@OneToMany(mappedBy="user", fetch=FetchType.LAZY, cascade=CascadeType.ALL)
 	private List<Record> records = new ArrayList<>();
 	
 	

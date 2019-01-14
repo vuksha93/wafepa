@@ -1,10 +1,10 @@
 package jwd.wafepa.service.impl;
 
-import java.util.List;
-
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import jwd.wafepa.model.Record;
@@ -16,6 +16,8 @@ import jwd.wafepa.service.RecordService;
 public class JpaRecordService 
 	implements RecordService {
 	
+	private static final int PAGE_SIZE = 5;
+	
 	@Autowired
 	private RecordRepository recordRepository;
 
@@ -25,8 +27,8 @@ public class JpaRecordService
 	}
 
 	@Override
-	public List<Record> findAll() {
-		return recordRepository.findAll();
+	public Page<Record> findAll(int page) {
+		return recordRepository.findAll(new PageRequest(page, PAGE_SIZE));
 	}
 
 	@Override

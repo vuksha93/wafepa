@@ -29,17 +29,19 @@ public class TestData {
 		activityService.save(new Activity("Swimming"));
 		activityService.save(new Activity("Running"));
 		
-		int userCount = 20;
+		int userCount = 5;
 		
-		for(int i = 1; i <= userCount; i++) {
+		//pravimo 5 korisnika
+		for (int i = 1; i <= userCount; i++) {
 			User user = new User();
 			user.setFirstName("First name " + i);
 			user.setLastName("Last name " + i);
-			user.setEmail("email" + i + "@example");
+			user.setEmail("email" + i + "@example.com");
 			user.setPassword("123");
 			userService.save(user);
-			
-			for(int j = 1; j <= 3; j++) {
+
+			//za svakog korisnika pravimo po 3 adrese
+			for (int j = 1; j <= 3; j++) {
 				Address address = new Address();
 				address.setNumber(Integer.toString(j));
 				address.setStreet("Street");
@@ -50,7 +52,7 @@ public class TestData {
 				addressService.save(address);
 			}
 			
-			
+			//TODO dodati records
 		}
 	}
 }

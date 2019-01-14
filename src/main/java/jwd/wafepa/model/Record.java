@@ -6,9 +6,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.Max;
 
 @Entity
 @Table(name="tbl_record")
@@ -16,13 +14,13 @@ public class Record {
 
 	@Id
 	@GeneratedValue
+	@Column
 	private Long id;
 	
 	@Column(nullable=false, name="time")
 	private String time;
 	
 	@Column(nullable=false, name="duration")
-	@Max(200)
 	private int duration;
 	
 	@Column(name="intensity")
@@ -31,11 +29,19 @@ public class Record {
 	@ManyToOne(fetch=FetchType.EAGER)
 	private User user;
 	
-	@OneToOne(fetch=FetchType.EAGER)
+	@ManyToOne(fetch=FetchType.EAGER)
 	private Activity activity;
 	
 	public Record() {
 		super();
+	}
+
+	public Record(Long id, String time, int duration, String intensity) {
+		super();
+		this.id = id;
+		this.time = time;
+		this.duration = duration;
+		this.intensity = intensity;
 	}
 
 	public Record(String time, int duration, String intensity, User user, Activity activity) {
@@ -96,7 +102,7 @@ public class Record {
 	public void setUser(User user) {
 		this.user = user;
 		if(!user.getRecords().contains(this)) {
-			user.addRecords(this);
+			user.getRecords().add(this);
 		}
 	}
 
@@ -106,6 +112,9 @@ public class Record {
 
 	public void setActivity(Activity activity) {
 		this.activity = activity;
+		if(!activity.getRecords().contains(this)) {
+			activity.getRecords().add(this);
+		}
 	}
 	
 }

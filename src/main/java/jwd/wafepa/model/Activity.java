@@ -1,11 +1,14 @@
 package jwd.wafepa.model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -19,6 +22,7 @@ public class Activity {
 	
 	@Id
 	@GeneratedValue
+	@Column
 	private Long id;
 	
 	@Column(nullable=false, length=60)
@@ -27,8 +31,8 @@ public class Activity {
 	@Column(name="adm_comment")
 	private String adminComment = "test";
 	
-	@OneToOne(fetch = FetchType.EAGER)
-	private Record record;
+	@OneToMany(mappedBy="activity", fetch = FetchType.LAZY, cascade=CascadeType.ALL)
+	private List<Record> records;
 	
 	
 	public Activity() {
@@ -86,12 +90,19 @@ public class Activity {
 		this.adminComment = adminComment;
 	}
 
-	public Record getRecord() {
-		return record;
+	public List<Record> getRecords() {
+		return records;
 	}
 
-	public void setRecord(Record record) {
-		this.record = record;
+	public void setRecords(List<Record> records) {
+		this.records = records;
 	}
 	
+	public void addRecords(Record record) {
+		this.records.add(record);
+		if(record.getActivity() != this) {
+			record.setActivity(this);
+		}
+	}
+
 }

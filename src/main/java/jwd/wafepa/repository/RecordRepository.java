@@ -9,6 +9,6 @@ import jwd.wafepa.model.Record;
 public interface RecordRepository
 	extends JpaRepository<Record, Long>{
 
-	
+	//TODO
 	
 }
