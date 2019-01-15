@@ -80,9 +80,7 @@ public class ApiRecordController {
 		
 		Record record = recordService.save(toRecord.convert(newRecordDto));
 		
-		Record newRecord = recordService.save(record);
-		
-		return new ResponseEntity<>(toRecordDto.convert(newRecord), HttpStatus.CREATED);
+		return new ResponseEntity<>(toRecordDto.convert(record), HttpStatus.CREATED);
 	}
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.PUT, consumes="application/json")

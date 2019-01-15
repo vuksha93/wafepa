@@ -16,10 +16,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import jwd.wafepa.model.Record;
 import jwd.wafepa.model.User;
+import jwd.wafepa.service.RecordService;
 import jwd.wafepa.service.UserService;
+import jwd.wafepa.support.RecordToRecordDTO;
 import jwd.wafepa.support.UserRegistrationDTOToUser;
 import jwd.wafepa.support.UserToUserDTO;
+import jwd.wafepa.web.dto.RecordDTO;
 import jwd.wafepa.web.dto.UserDTO;
 import jwd.wafepa.web.dto.UserRegistrationDTO;
 
@@ -31,10 +35,16 @@ public class ApiUserController {
 	private UserService userService;
 	
 	@Autowired
+	private RecordService recordService;
+	
+	@Autowired
 	private UserToUserDTO toUserDTO;
 	
 	@Autowired
 	private UserRegistrationDTOToUser toUserByUserRegistrationDTO;
+	
+	@Autowired
+	private RecordToRecordDTO toRecordDTO;
 	
 	@RequestMapping(method=RequestMethod.GET)
 	public ResponseEntity<Iterable<UserDTO>> getUsers(
@@ -147,6 +157,24 @@ public class ApiUserController {
 		User deleted = userService.delete(id);
 		
 		return new ResponseEntity<>(toUserDTO.convert(deleted), HttpStatus.OK);
+	}
+
+	@RequestMapping(method=RequestMethod.GET, value="/{userId}/records")
+	public ResponseEntity<List<RecordDTO>> getUserRecords(
+			@PathVariable Long userId,
+			@RequestParam(defaultValue="0") int page) {
+		
+		Page<Record> pageRecords = recordService.findByUserId(userId, page);
+		List<Record> records = null;
+		
+		if(pageRecords == null || pageRecords.getContent().isEmpty()) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		} else {
+			records = pageRecords.getContent();
+		}
+		
+		return new ResponseEntity<>(toRecordDTO.convert(records), HttpStatus.OK);
+		
 	}
 	
 }

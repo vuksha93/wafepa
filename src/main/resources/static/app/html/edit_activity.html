@@ -1,6 +1,13 @@
 <div ng-controller="editActivityCtrl">
 	<h1>Edit Activity</h1>
-	<label>Name</label>
-	<input ng-model="activity.name"/>
-	<button ng-click="edit()">Edit</button>
+	
+	<div class="row">
+		<div class="col-12">
+			<div class="form-group">
+				<label for="name">Name: </label>
+				<input class="form-control" id="name" ng-model="activity.name"/>
+			</div>
+			<button class="btn btn-secondary" ng-click="edit()">Edit</button>
+		</div>
+	</div>
 </div>

@@ -11,16 +11,12 @@ import jwd.wafepa.model.Activity;
 import jwd.wafepa.model.Record;
 import jwd.wafepa.model.User;
 import jwd.wafepa.service.ActivityService;
-import jwd.wafepa.service.RecordService;
 import jwd.wafepa.service.UserService;
 import jwd.wafepa.web.dto.RecordDTO;
 
 @Component
 public class RecordDTOToRecord 
 	implements Converter<RecordDTO, Record>{
-	
-	@Autowired
-	private RecordService recordService;
 	
 	@Autowired
 	private UserService userService;
@@ -35,13 +31,7 @@ public class RecordDTOToRecord
 		Activity activity = activityService.findOne(dtoRecord.getActivityId());
 		
 		if(user != null && activity != null) {
-			Record record = null;
-			
-			if(dtoRecord.getId() != null) {
-				record = recordService.findOne(dtoRecord.getId());
-			} else {
-				record = new Record();
-			}
+			Record record = new Record();
 			
 			record.setId(dtoRecord.getId());
 			record.setTime(dtoRecord.getTime());

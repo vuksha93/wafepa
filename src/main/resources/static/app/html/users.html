@@ -1,23 +1,33 @@
 <div ng-controller="usersCtrl">
 	<h1>Users</h1>
 	
-	<table border="1">
-		<tr>
-			<th>Email</th>
-			<th>First name</th>
-			<th>Last name</th>
-			<th>&nbsp;</th>
-			<th>&nbsp;</th>
-		</tr>
-		<tr ng-repeat="u in users">
-			<td>{{u.email}}</td>
-			<td>{{u.firstName}}</td>
-			<td>{{u.lastName}}</td>
-			<td><button ng-click="goToEdit(u.id)">Edit</button></td>
-			<td><button ng-click="deleteUser(u.id)">Delete</button></td>
-		</tr>		
-	</table>
+	<div class="row">
+		
+		<div class="col-12">
+			<table class="table table-bordered">
+				<thead class="thead-dark">
+					<tr>
+						<th>Email</th>
+						<th>First name</th>
+						<th>Last name</th>
+						<th>&nbsp;</th>
+						<th>&nbsp;</th>				
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="u in users">
+						<td>{{u.email}}</td>
+						<td>{{u.firstName}}</td>
+						<td>{{u.lastName}}</td>
+						<td><button class="btn btn-secondary" ng-click="goToEdit(u.id)">Edit</button></td>
+						<td><button class="btn btn-secondary" ng-click="deleteUser(u.id)">Delete</button></td>
+					</tr>
+				</tbody>		
+			</table>
+			
+			<button class="btn btn-info" ng-click="goToAdd()">Add user</button>
+		</div>
 	
-	<button ng-click="goToAdd()">Add user</button>
+	</div>
 	
 </div>

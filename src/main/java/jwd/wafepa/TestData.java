@@ -6,9 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import jwd.wafepa.model.Activity;
+import jwd.wafepa.model.Address;
 import jwd.wafepa.model.Record;
 import jwd.wafepa.model.User;
 import jwd.wafepa.service.ActivityService;
+import jwd.wafepa.service.AddressService;
 import jwd.wafepa.service.RecordService;
 import jwd.wafepa.service.UserService;
 
@@ -21,8 +23,8 @@ public class TestData {
 	@Autowired
 	private UserService userService;
 	
-//	@Autowired
-//	private AddressService addressService;
+	@Autowired
+	private AddressService addressService;
 	
 	@Autowired
 	private RecordService recordService;
@@ -46,14 +48,23 @@ public class TestData {
 		user2.setPassword("123");
 		user2 = userService.save(user2);
 		
+		Address address1 = new Address();
+		address1.setStreet("Street");
+		address1.setNumber("1");
+		address1.setUser(user1);
+		addressService.save(address1);
+		
+		Address address2 = new Address();
+		address2.setStreet("Street");
+		address2.setNumber("2");
+		address2.setUser(user2);
+		addressService.save(address2);
 		
 		Record record1 = new Record();
 		record1.setTime("20/11/2018 08:00");
 		record1.setDuration(60);
 		record1.setIntensity("Low");
 		record1.setUser(user1);
-		
-		activity1.addRecords(record1);
 		record1.setActivity(activity1);
 		recordService.save(record1);
 		

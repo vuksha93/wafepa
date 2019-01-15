@@ -9,6 +9,7 @@ wafepaApp.controller("activitiesCtrl", function($scope, $http, $location) {
 	var url = "/api/activities";
 	
 	$scope.activities = [];
+	$scope.showAlert = false;
 	
 	var getActivities = function() {
 		
@@ -19,7 +20,8 @@ wafepaApp.controller("activitiesCtrl", function($scope, $http, $location) {
 			},
 			function error(res) {
 				$scope.activities = [];
-				alert("Could not fetch activities!");
+				$scope.showAlert = true;
+//				alert("Could not fetch activities!");
 			}
 		);
 		
@@ -140,7 +142,7 @@ wafepaApp.controller("viewUserCtrl", function($scope, $http, $routeParams) {
 
 wafepaApp.controller("usersCtrl", function($scope, $http, $location) {
 	
-	var url = "/api/users?page=0";
+	var url = "/api/users";
 	
 	$scope.users = [];
 	
@@ -151,7 +153,7 @@ wafepaApp.controller("usersCtrl", function($scope, $http, $location) {
 				$scope.users = res.data;
 			},
 			function error(res) {
-				$scope.users = [];
+//				$scope.users = [];
 				alert("Could not fetch users!");
 			}
 		);
@@ -267,6 +269,90 @@ wafepaApp.controller("countriesCtrl", function($scope, $http) {
 	
 });
 
+wafepaApp.controller("recordsCtrl", function($scope, $http) {
+	
+	var recordsUrl = "/api/records"
+	var usersUrl = "/api/users"
+	var activitiesUrl = "/api/activities"
+	
+	$scope.records = [];
+	$scope.users = [];
+	$scope.activities = [];
+	
+	$scope.newRecord = {};
+	$scope.newRecord.time = "";
+	$scope.newRecord.duration = "";
+	$scope.newRecord.intensity = "";
+	$scope.newRecord.userId = "";
+	$scope.newRecord.activityId = "";
+	
+	
+	var getRecords = function() {
+		$http.get(recordsUrl).then(
+			function success(res) {
+				$scope.records = res.data;
+			},
+			function error(res) {
+				alert("Could not fetch records!")
+			}
+		);
+		
+	}
+	
+	getRecords();
+	
+	var getUsers = function() {
+		var promise = $http.get(usersUrl);
+		promise.then(
+			function success(res) {
+				$scope.users = res.data;
+			},
+			function error(res) {
+				alert("Could not fetch users!");
+			}
+		);
+		
+	}
+	
+	getUsers();
+	
+	var getActivities = function() {
+		
+		var promise = $http.get(activitiesUrl);
+		promise.then(
+			function success(res) {
+				$scope.activities = res.data;
+			},
+			function error(res) {
+				$scope.activities = [];
+				alert("Could not fetch activities!");
+			}
+		);
+		
+	}
+	
+	getActivities();
+	
+	$scope.doAdd = function() {
+//		console.log($scope.newRecord);
+		$http.post(recordsUrl, $scope.newRecord).then(
+			function success() {
+				getRecords();
+				
+				$scope.newRecord.time = "";
+				$scope.newRecord.duration = "";
+				$scope.newRecord.intensity = "";
+				$scope.newRecord.userId = "";
+				$scope.newRecord.activityId = "";
+			},
+			function error() {
+				alert("Could not add record!");
+			}
+		);
+	}
+	
+});
+
 wafepaApp.config(['$routeProvider', function($routeProvider) {
 	$routeProvider
 		.when('/', {
@@ -295,6 +381,9 @@ wafepaApp.config(['$routeProvider', function($routeProvider) {
 		})
 		.when('/countries', {
 			templateUrl : '/app/html/countries.html'
+		})
+		.when('/records', {
+			templateUrl : '/app/html/records.html'
 		})
 		.otherwise({
 			redirectTo: '/'

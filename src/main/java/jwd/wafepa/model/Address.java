@@ -14,7 +14,7 @@ public class Address {
 
 	@Id
 	@GeneratedValue
-	@Column
+	@Column(name="id")
 	private Long id;
 	
 	@Column(name="street", nullable=false)

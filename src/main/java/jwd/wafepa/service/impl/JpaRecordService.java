@@ -52,4 +52,9 @@ public class JpaRecordService
 		return recordRepository.findByUserId(userId, new PageRequest(page, PAGE_SIZE));
 	}
 
+	@Override
+	public Page<Record> findByActivityId(Long activityId, int page) {
+		return recordRepository.findByActivityId(activityId, new PageRequest(page, PAGE_SIZE));
+	}
+
 }

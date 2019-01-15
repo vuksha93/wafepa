@@ -18,7 +18,7 @@ public class User {
 	
 	@Id
 	@GeneratedValue
-	@Column
+	@Column(name="id")
 	private Long id;
 	
 	@Column(nullable=false, unique=true)
@@ -33,7 +33,7 @@ public class User {
 	@Column(nullable=false)
 	private String lastName;
 	
-	@OneToMany(mappedBy="user")
+	@OneToMany(mappedBy="user", fetch=FetchType.LAZY, cascade=CascadeType.ALL)
 	private List<Address> addresses = new ArrayList<>();
 	
 	@OneToMany(mappedBy="user", fetch=FetchType.LAZY, cascade=CascadeType.ALL)

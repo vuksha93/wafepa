@@ -11,4 +11,5 @@ public interface RecordService {
 	Record save(Record record);
 	Record delete(Long id);
 	Page<Record> findByUserId(Long userId, int page);
+	Page<Record> findByActivityId(Long activityId, int page);
 }
