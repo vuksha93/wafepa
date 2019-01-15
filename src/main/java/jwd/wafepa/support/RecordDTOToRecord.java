@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
+import org.springframework.stereotype.Component;
 
 import jwd.wafepa.model.Activity;
 import jwd.wafepa.model.Record;
@@ -14,6 +15,7 @@ import jwd.wafepa.service.RecordService;
 import jwd.wafepa.service.UserService;
 import jwd.wafepa.web.dto.RecordDTO;
 
+@Component
 public class RecordDTOToRecord 
 	implements Converter<RecordDTO, Record>{
 	

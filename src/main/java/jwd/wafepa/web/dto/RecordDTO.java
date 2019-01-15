@@ -1,11 +1,14 @@
 package jwd.wafepa.web.dto;
 
 import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 
 public class RecordDTO {
 
 	private Long id;
 	private String time;
+	
+	@Min(1)
 	@Max(200)
 	private int duration;
 	private String intensity;

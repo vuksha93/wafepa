@@ -10,5 +10,5 @@ public interface RecordService {
 	Page<Record> findAll(int page);
 	Record save(Record record);
 	Record delete(Long id);
-	//TODO
+	Page<Record> findByUserId(Long userId, int page);
 }

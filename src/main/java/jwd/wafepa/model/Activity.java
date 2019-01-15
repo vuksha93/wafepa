@@ -1,5 +1,6 @@
 package jwd.wafepa.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -22,7 +23,7 @@ public class Activity {
 	
 	@Id
 	@GeneratedValue
-	@Column
+	@Column(name="id")
 	private Long id;
 	
 	@Column(nullable=false, length=60)
@@ -31,8 +32,8 @@ public class Activity {
 	@Column(name="adm_comment")
 	private String adminComment = "test";
 	
-	@OneToMany(mappedBy="activity", fetch = FetchType.LAZY, cascade=CascadeType.ALL)
-	private List<Record> records;
+	@OneToMany(mappedBy="activity", fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+	private List<Record> records = new ArrayList<>();
 	
 	
 	public Activity() {
@@ -99,10 +100,10 @@ public class Activity {
 	}
 	
 	public void addRecords(Record record) {
-		this.records.add(record);
 		if(record.getActivity() != this) {
 			record.setActivity(this);
 		}
+		records.add(record);
 	}
 
 }

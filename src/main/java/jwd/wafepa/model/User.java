@@ -111,10 +111,10 @@ public class User {
 	}
 	
 	public void addAddress(Address address) {
-		this.addresses.add(address);
 		if(address.getUser() != this) {
 			address.setUser(this);
 		}
+		addresses.add(address);
 	}
 
 	public List<Record> getRecords() {
@@ -125,11 +125,11 @@ public class User {
 		this.records = records;
 	}
 	
-	public void addRecords(Record record) {
-		this.records.add(record);
+	public void addRecords(Record record) {		
 		if(record.getUser() != this) {
 			record.setUser(this);
 		}
+		records.add(record);
 	}
 	
 }

@@ -47,4 +47,9 @@ public class JpaRecordService
 		return toDelete;
 	}
 
+	@Override
+	public Page<Record> findByUserId(Long userId, int page) {
+		return recordRepository.findByUserId(userId, new PageRequest(page, PAGE_SIZE));
+	}
+
 }
