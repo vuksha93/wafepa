@@ -14,6 +14,7 @@ import jwd.wafepa.model.Intensity;
 public class RecordDTO {
 	
 	private Long id;
+	
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy hh:mm")
 	private Date time;
 	

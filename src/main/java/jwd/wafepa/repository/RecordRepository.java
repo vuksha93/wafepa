@@ -12,6 +12,7 @@ public interface RecordRepository
 	extends JpaRepository<Record, Long>{
 
 	Page<Record> findByUserId(Long id, Pageable page);
+	
 	Page<Record> findByActivityId(Long id, Pageable page);
 	
 }
