@@ -15,4 +15,7 @@ public interface RecordRepository
 	
 	Page<Record> findByActivityId(Long id, Pageable page);
 	
+	
+	Page<Record>findByActivityName(String name, Pageable page);
+	
 }

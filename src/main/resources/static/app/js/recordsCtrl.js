@@ -1,4 +1,4 @@
-wafepaApp.controller("recordsCtrl", function($scope, $http) {
+wafepaApp.controller("recordsCtrl", function($scope, $http, $location) {
 	
 	var recordsUrl = "/api/records"
 	var usersUrl = "/api/users"
@@ -78,6 +78,10 @@ wafepaApp.controller("recordsCtrl", function($scope, $http) {
 				alert("Could not add record!");
 			}
 		);
+	}
+	
+	$scope.goToEdit = function(id) {
+		$location.path("/records/edit/" + id);
 	}
 	
 });

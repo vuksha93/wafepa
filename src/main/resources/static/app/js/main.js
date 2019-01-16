@@ -36,6 +36,9 @@ wafepaApp.config(['$routeProvider', function($routeProvider) {
 		.when('/records', {
 			templateUrl : '/app/html/records.html'
 		})
+		.when('/records/edit/:id', {
+			templateUrl : '/app/html/edit_record.html'
+		})
 		.otherwise({
 			redirectTo: '/'
 		});

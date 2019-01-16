@@ -47,6 +47,7 @@
 						<th>Intensity</th>
 						<th>User</th>
 						<th>Activity</th>
+						<th>&nbsp;</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -56,6 +57,8 @@
 						<td>{{r.intensity}}</td>
 						<td>{{r.userName}}</td>
 						<td>{{r.activityName}}</td>
+						<td><button class="btn btn-secondary" 
+						ng-click="goToEdit(r.id)">Edit</button></td>
 					</tr>
 				</tbody>
 			
