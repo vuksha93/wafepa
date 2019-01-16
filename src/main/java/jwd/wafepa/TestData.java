@@ -1,5 +1,8 @@
 package jwd.wafepa;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import jwd.wafepa.model.Activity;
 import jwd.wafepa.model.Address;
+import jwd.wafepa.model.Intensity;
 import jwd.wafepa.model.Record;
 import jwd.wafepa.model.User;
 import jwd.wafepa.service.ActivityService;
@@ -30,7 +34,7 @@ public class TestData {
 	private RecordService recordService;
 	
 	@PostConstruct
-	public void init() {
+	public void init() throws ParseException {
 		Activity activity1 = activityService.save(new Activity("Swimming"));
 		Activity activity2 = activityService.save(new Activity("Running"));
 		
@@ -60,18 +64,21 @@ public class TestData {
 		address2.setUser(user2);
 		addressService.save(address2);
 		
+		String pattern = "dd/MM/yyyy hh:mm";
+		SimpleDateFormat sdf = new SimpleDateFormat(pattern);
+		
 		Record record1 = new Record();
-		record1.setTime("20/11/2018 08:00");
+		record1.setTime(sdf.parse("20/11/2018 08:00"));
 		record1.setDuration(60);
-		record1.setIntensity("Low");
+		record1.setIntensity(Intensity.LOW);
 		record1.setUser(user1);
 		record1.setActivity(activity1);
 		recordService.save(record1);
 		
 		Record record2 = new Record();
-		record2.setTime("21/11/2018 08:00");
+		record2.setTime(sdf.parse("21/11/2018 08:00"));
 		record2.setDuration(60);
-		record2.setIntensity("Moderate");
+		record2.setIntensity(Intensity.EXTREME);
 		record2.setUser(user2);
 		record2.setActivity(activity2);
 		recordService.save(record2);

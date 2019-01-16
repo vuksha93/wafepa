@@ -14,7 +14,12 @@
 				</div>
 				<div class="form-group">
 					<label for="intensity">Intensity</label>
-					<input class="form-control" id="intensity" ng-model="newRecord.intensity"/>
+					<select class="form-control" id="intensity" ng-model="newRecord.intensity">
+						<option value="LOW">Low</option>
+						<option value="MODERATE">Moderate</option>
+						<option value="HIGH">High</option>
+						<option value="EXTREME">Extreme</option>
+					</select>
 				</div>
 				<div class="form-group">
 					<label for="user">User</label>

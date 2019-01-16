@@ -1,17 +1,28 @@
 package jwd.wafepa.web.dto;
 
+import java.util.Date;
+
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 
-public class RecordDTO {
+import com.fasterxml.jackson.annotation.JsonFormat;
 
+import jwd.wafepa.model.Intensity;
+
+public class RecordDTO {
+	
 	private Long id;
-	private String time;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy hh:mm")
+	private Date time;
 	
 	@Min(1)
 	@Max(200)
 	private int duration;
-	private String intensity;
+	
+	@Enumerated(EnumType.STRING)
+	private Intensity intensity;
 	
 	private Long userId;
 	private Long activityId;
@@ -31,11 +42,11 @@ public class RecordDTO {
 		this.id = id;
 	}
 
-	public String getTime() {
+	public Date getTime() {
 		return time;
 	}
 
-	public void setTime(String time) {
+	public void setTime(Date time) {
 		this.time = time;
 	}
 
@@ -47,11 +58,11 @@ public class RecordDTO {
 		this.duration = duration;
 	}
 
-	public String getIntensity() {
+	public Intensity getIntensity() {
 		return intensity;
 	}
 
-	public void setIntensity(String intensity) {
+	public void setIntensity(Intensity intensity) {
 		this.intensity = intensity;
 	}
 

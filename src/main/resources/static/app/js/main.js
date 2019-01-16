@@ -279,6 +279,8 @@ wafepaApp.controller("recordsCtrl", function($scope, $http) {
 	$scope.users = [];
 	$scope.activities = [];
 	
+	//TODO srediti time da prikaza Date
+	
 	$scope.newRecord = {};
 	$scope.newRecord.time = "";
 	$scope.newRecord.duration = "";
