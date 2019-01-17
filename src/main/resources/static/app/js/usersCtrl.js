@@ -11,7 +11,7 @@ wafepaApp.controller("usersCtrl", function($scope, $http, $location) {
 				$scope.users = res.data;
 			},
 			function error(res) {
-//				$scope.users = [];
+				$scope.users = [];
 				alert("Could not fetch users!");
 			}
 		);
