@@ -56,5 +56,20 @@ public class JpaRecordService
 	public Page<Record> findByActivityId(Long activityId, int page) {
 		return recordRepository.findByActivityId(activityId, new PageRequest(page, PAGE_SIZE));
 	}
+	
+	@Override
+	public Page<Record> search(String activityName, Integer minDuration, 
+			String intensity, int pageNum) {
+		
+		if(activityName != null) {
+			activityName = "%" + activityName + "%";
+		}
+		if(intensity != null) {
+			intensity = "%" + intensity + "%";
+		}
+		
+		return recordRepository.search(activityName, minDuration, intensity,
+				new PageRequest(pageNum, PAGE_SIZE));
+	}
 
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -37,15 +38,24 @@ public class ApiRecordController {
 
 	@RequestMapping(method=RequestMethod.GET)
 	ResponseEntity<List<RecordDTO>> getRecords(
+			@RequestParam(required=false) String activityName,
+			@RequestParam(required=false) Integer minDuration,
+			@RequestParam(required=false) String intensity,
 			@RequestParam(value="page", defaultValue="0") int page) {
 		
-		Page<Record> recordsPages = recordService.findAll(page);
+		Page<Record> recordsPages = null;
 		
-		if(recordsPages == null) {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		if(activityName != null || minDuration != null || intensity != null) {
+			recordsPages = recordService.search(activityName, minDuration, intensity, page);
+		} else {
+			recordsPages = recordService.findAll(page);
 		}
 		
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("totalPages", Integer.toString(recordsPages.getTotalPages()) );
+		
 		return new ResponseEntity<>(toRecordDto.convert(recordsPages.getContent()),
+				headers,
 				HttpStatus.OK);
 	}
 	

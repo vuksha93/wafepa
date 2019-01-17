@@ -10,7 +10,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
 /**
  * Models a physical activity.
@@ -18,7 +17,6 @@ import javax.persistence.Table;
  *
  */
 @Entity
-@Table(name="tbl_activity")
 public class Activity {
 	
 	@Id
