@@ -24,8 +24,25 @@
 					</tr>
 				</tbody>		
 			</table>
+			<div class="btn-group float-right">
+				<button ng-disabled="page == 0" ng-click="changePage(-1)" 
+				class="btn btn-info">Previous</button>
+				<button ng-disabled="page == totalPages - 1" ng-click="changePage(1)" 
+				class="btn btn-info">Next</button>
+			</div>
 			
 			<button class="btn btn-info" ng-click="goToAdd()">Add user</button>
+		</div>
+		
+		<div class="col-12 col-lg-6">
+			<form>
+				<div class="form-group">
+					<label>Search by first or last name</label>
+					<input class="form-control" ng-model="searchParams.name"/>
+				</div>
+				<button class="btn btn-info" ng-click="search()">Search</button>
+			</form>
+		
 		</div>
 	
 	</div>

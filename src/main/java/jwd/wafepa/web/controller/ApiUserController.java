@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -78,7 +79,10 @@ public class ApiUserController {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 		
-		return new ResponseEntity<>(toUserDTO.convert(users), HttpStatus.OK);
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("totalPages", Integer.toString(usersPage.getTotalPages()) );
+		
+		return new ResponseEntity<>(toUserDTO.convert(users), headers, HttpStatus.OK);
 	}
 	
 	@RequestMapping(method=RequestMethod.PUT)
