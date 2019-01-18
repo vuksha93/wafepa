@@ -60,12 +60,18 @@ public class JpaUserService
 	}
 	
 	@Override
-	public Page<User> findByFirstname(String firstName, int page) {	
+	public Page<User> findByFirstName(String firstName, int page) {
+//		if(firstName != null) {
+//			firstName = '%' + firstName + '%';
+//		}
 		return userRepository.findByFirstName(firstName, new PageRequest(page, PAGE_SIZE));
 	}
 
 	@Override
-	public Page<User> findByLastname(String lastName, int page) {		
+	public Page<User> findByLastName(String lastName, int page) {	
+//		if(lastName != null) {
+//			lastName = '%' + lastName + '%';
+//		}
 		return userRepository.findByLastName(lastName, new PageRequest(page, PAGE_SIZE));
 	}
 	
@@ -74,6 +80,14 @@ public class JpaUserService
 		save(new User("pera@pera", "pera", "Pera", "Peric"));
 		save(new User("mika@mika", "mika", "Mika", "Mikic"));
 		save(new User("zika@zika", "zika", "Zika", "Zikic"));
+	}
+
+	@Override
+	public Page<User> findByFirstNameContainingOrLastNameContaining(
+			String name, int page) {
+		
+		return userRepository.findByFirstOrLastNameContaining(
+				name, new PageRequest(page, PAGE_SIZE));
 	}
 
 }

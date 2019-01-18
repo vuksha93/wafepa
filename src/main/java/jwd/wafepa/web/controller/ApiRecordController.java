@@ -95,9 +95,8 @@ public class ApiRecordController {
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.PUT, consumes="application/json")
 	public ResponseEntity<RecordDTO> editRecord(
-			@Validated
 			@PathVariable Long id,
-			@RequestBody RecordDTO recordDto) {
+			@Validated @RequestBody RecordDTO recordDto) {
 		
 		if(!id.equals(recordDto.getId())) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

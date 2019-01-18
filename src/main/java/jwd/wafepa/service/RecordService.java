@@ -17,5 +17,5 @@ public interface RecordService {
 			@Param("activityName") String activityName, 
 			@Param("minDuration") Integer minDuration, 
 			@Param("intensity") String intensity, 
-			int pageNum);
+			int page);
 }

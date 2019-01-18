@@ -75,19 +75,25 @@ public class InMemoryUserService implements UserService {
 	}
 
 	@Override
-	public Page<User> findByFirstname(String firstName, int page) {
+	public Page<User> findByFirstName(String firstName, int page) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Page<User> findByLastname(String lastName, int page) {
+	public Page<User> findByLastName(String lastName, int page) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public Page<User> findAll(int page) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Page<User> findByFirstNameContainingOrLastNameContaining(String name, int page) {
 		// TODO Auto-generated method stub
 		return null;
 	}

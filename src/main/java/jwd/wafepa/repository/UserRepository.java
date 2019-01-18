@@ -22,4 +22,10 @@ public interface UserRepository
 	@Query("SELECT u FROM User u WHERE u.lastName = :lastName")
 	Page<User> findByLastName(@Param("lastName") String lastName, Pageable pageRequest);
 	
+	@Query("SELECT u FROM User u WHERE u.firstName LIKE CONCAT('%',:name,'%') OR "
+			+ "u.lastName LIKE CONCAT('%',:name,'%')")
+	Page<User> findByFirstOrLastNameContaining(
+			@Param("name") String name, 
+			Pageable pageRequest);
+	
 }

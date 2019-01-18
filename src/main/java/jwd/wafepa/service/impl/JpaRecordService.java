@@ -59,17 +59,17 @@ public class JpaRecordService
 	
 	@Override
 	public Page<Record> search(String activityName, Integer minDuration, 
-			String intensity, int pageNum) {
+			String intensity, int page) {
 		
 		if(activityName != null) {
-			activityName = "%" + activityName + "%";
+			activityName = '%' + activityName + '%';
 		}
 		if(intensity != null) {
-			intensity = "%" + intensity + "%";
+			intensity = '%' + intensity + '%';
 		}
 		
 		return recordRepository.search(activityName, minDuration, intensity,
-				new PageRequest(pageNum, PAGE_SIZE));
+				new PageRequest(page, PAGE_SIZE));
 	}
 
 }

@@ -1,17 +1,11 @@
 package jwd.wafepa.model;
 
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 @Entity
 public class Record {
@@ -21,15 +15,15 @@ public class Record {
 	private Long id;
 	
 	@Column(nullable=false, name="time")
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date time;
+//	@Temporal(TemporalType.TIMESTAMP)
+	private String time;
 	
 	@Column(nullable=false, name="duration")
 	private int duration;
 	
 	@Column(nullable=false, name="intensity")
-	@Enumerated(EnumType.STRING)
-	private Intensity intensity;
+//	@Enumerated(EnumType.STRING)
+	private String intensity;
 	
 	@ManyToOne(fetch=FetchType.EAGER)
 	private User user;
@@ -41,7 +35,7 @@ public class Record {
 		super();
 	}
 
-	public Record(Long id, Date time, int duration, Intensity intensity) {
+	public Record(Long id, String time, int duration, String intensity) {
 		super();
 		this.id = id;
 		this.time = time;
@@ -49,7 +43,7 @@ public class Record {
 		this.intensity = intensity;
 	}
 
-	public Record(Date time, int duration, Intensity intensity, User user, Activity activity) {
+	public Record(String time, int duration, String intensity, User user, Activity activity) {
 		super();
 		this.time = time;
 		this.duration = duration;
@@ -58,7 +52,7 @@ public class Record {
 		this.activity = activity;
 	}
 
-	public Record(Long id, Date time, int duration, Intensity intensity, User user, Activity activity) {
+	public Record(Long id, String time, int duration, String intensity, User user, Activity activity) {
 		super();
 		this.id = id;
 		this.time = time;
@@ -76,11 +70,11 @@ public class Record {
 		this.id = id;
 	}
 
-	public Date getTime() {
+	public String getTime() {
 		return time;
 	}
 
-	public void setTime(Date time) {
+	public void setTime(String time) {
 		this.time = time;
 	}
 
@@ -92,11 +86,11 @@ public class Record {
 		this.duration = duration;
 	}
 
-	public Intensity getIntensity() {
+	public String getIntensity() {
 		return intensity;
 	}
 
-	public void setIntensity(Intensity intensity) {
+	public void setIntensity(String intensity) {
 		this.intensity = intensity;
 	}
 

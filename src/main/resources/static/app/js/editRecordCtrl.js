@@ -1,11 +1,11 @@
 wafepaApp.controller("editRecordCtrl", function($scope, $http, $routeParams, $location) {
 	
 	var recordUrl = "/api/records/" + $routeParams.id;
-//	var usersUrl = "/api/users"
-//	var activitiesUrl = "/api/activities"
+	var usersUrl = "/api/users"
+	var activitiesUrl = "/api/activities"
 	
-//	$scope.users = [];
-//	$scope.activities = [];	
+	$scope.users = [];
+	$scope.activities = [];	
 		
 	$scope.record = {};
 	$scope.record.time = "";
@@ -17,7 +17,7 @@ wafepaApp.controller("editRecordCtrl", function($scope, $http, $routeParams, $lo
 	$scope.record.activityName = "";
 	
 	var getRecord = function() {
-		$http.get(recordUrl).then(
+		return $http.get(recordUrl).then(
 			function success(res) {
 				$scope.record = res.data;
 			},
@@ -27,39 +27,33 @@ wafepaApp.controller("editRecordCtrl", function($scope, $http, $routeParams, $lo
 		);
 	}
 	
-	getRecord();
+	var getUsers = function() {
+		return $http.get(usersUrl).then(
+			function success(res) {
+				$scope.users = res.data;
+			},
+			function error(res) {
+				alert("Could not fetch users!");
+			}
+		);
+	}
 	
-//	var getUsers = function() {
-//		var promise = $http.get(usersUrl);
-//		promise.then(
-//			function success(res) {
-//				$scope.users = res.data;
-//			},
-//			function error(res) {
-//				alert("Could not fetch users!");
-//			}
-//		);
-//		
-//	}
-//	
-//	getUsers();
-//	
-//	var getActivities = function() {
-//		
-//		var promise = $http.get(activitiesUrl);
-//		promise.then(
-//			function success(res) {
-//				$scope.activities = res.data;
-//			},
-//			function error(res) {
-//				$scope.activities = [];
-//				alert("Could not fetch activities!");
-//			}
-//		);
-//		
-//	}
-//	
-//	getActivities();
+	
+	var getActivities = function() {
+		return $http.get(activitiesUrl).then(
+			function success(res) {
+				$scope.activities = res.data;
+			},
+			function error(res) {
+				$scope.activities = [];
+				alert("Could not fetch activities!");
+			}
+		);	
+	}
+	
+	getActivities().then(getUsers).then(getRecord);
+	
+	
 	
 	$scope.edit = function() {
 //		console.log($scope.record);

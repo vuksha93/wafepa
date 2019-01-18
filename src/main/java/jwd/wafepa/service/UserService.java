@@ -14,7 +14,10 @@ public interface UserService {
 	User delete(Long id);
 	Iterable<User> save(List<User> users);
 	Page<User> findByEmailContaining(String email, int page);
-	Page<User> findByFirstname(String firstName, int page);
-	Page<User> findByLastname(String lastName, int page);
+	Page<User> findByFirstName(String firstName, int page);
+	Page<User> findByLastName(String lastName, int page);
+	Page<User> findByFirstNameContainingOrLastNameContaining(
+			String name,
+			int page);
 	
 }

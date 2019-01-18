@@ -1,4 +1,4 @@
-wafepaApp.controller("activitiesCtrl", function($scope, $http, $location) {
+wafepaApp.controller("activitiesCtrl", function($scope, $http, $location, activityService) {
 	
 	var url = "/api/activities";
 	
@@ -6,21 +6,14 @@ wafepaApp.controller("activitiesCtrl", function($scope, $http, $location) {
 	$scope.showAlert = false;
 	
 	var getActivities = function() {
-		
-		var promise = $http.get(url);
-		promise.then(
-			function success(res) {
-				$scope.activities = res.data;
-			},
-			function error(res) {
-				$scope.activities = [];
-				$scope.showAlert = true;
-//				alert("Could not fetch activities!");
-			}
-		);
-		
-	}
 	
+		activityService.getActivities().then(
+			function(data) {
+				$scope.activities = data;
+				$scope.showAlert = data.length == 0;
+			}	
+		);
+	}
 	getActivities();
 	
 	$scope.goToEdit = function(id) {
@@ -28,16 +21,7 @@ wafepaApp.controller("activitiesCtrl", function($scope, $http, $location) {
 	}
 	
 	$scope.deleteActivity = function(id) {
-		
-		$http.delete("api/activities/" + id).then(
-			function success() {
-				getActivities();
-			},
-			function error() {
-				alert("Could not delete activity!");
-			}
-		);	
-		
+		activityService.deleteActivity(id).then(getActivities);
 	}
 	
 	$scope.view = function(id) {

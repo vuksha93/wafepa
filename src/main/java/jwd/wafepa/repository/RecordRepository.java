@@ -18,12 +18,12 @@ public interface RecordRepository
 	Page<Record> findByActivityId(Long id, Pageable page);
 	
 	@Query("SELECT r FROM Record r WHERE "
-			+ "(:activityName IS null OR r.activity.name LIKE :activityName) AND "
-			+ "(:minDuration IS null OR r.duration >= :minDuration) AND "
-			+ "(:intensity IS null OR r.intensity LIKE :intensity)")
+			+ "(:activityName IS NULL OR r.activity.name LIKE :activityName) AND "
+			+ "(:minDuration IS NULL OR r.duration >= :minDuration) AND "
+			+ "(:intensity IS NULL OR r.intensity LIKE :intensity)")
 	Page<Record> search(
 			@Param("activityName") String name,
 			@Param("minDuration") Integer minDuration,
 			@Param("intensity") String intensity,
-			Pageable pageRequest);
+			Pageable page);
 }

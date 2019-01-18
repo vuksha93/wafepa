@@ -15,11 +15,38 @@ wafepaApp.controller("recordsCtrl", function($scope, $http, $location) {
 	$scope.newRecord.userId = "";
 	$scope.newRecord.activityId = "";
 	
+	$scope.searchParams = {};
+	$scope.searchParams.activityName = "";
+	$scope.searchParams.minimumDuration = "";
+	$scope.searchParams.intensity = "";
+	
+	$scope.page = 0;
+	$scope.totalPages = 1;
+	
+	$scope.showForm = false;
 	
 	var getRecords = function() {
-		$http.get(recordsUrl).then(
+		
+		var config = {params: {}};
+		
+		if($scope.searchParams.activityName != ""){
+			config.params.activityName = $scope.searchParams.activityName;
+		}
+		
+		if($scope.searchParams.minimumDuration != ""){
+			config.params.minDuration = $scope.searchParams.minimumDuration;
+		}
+		
+		if($scope.searchParams.intensity != ""){
+			config.params.intensity = $scope.searchParams.intensity;
+		}
+		
+		config.params.page = $scope.page;
+		
+		$http.get(recordsUrl, config).then(
 			function success(res) {
 				$scope.records = res.data;
+				$scope.totalPages = res.headers("totalPages");
 			},
 			function error(res) {
 				alert("Could not fetch records!")
@@ -82,6 +109,23 @@ wafepaApp.controller("recordsCtrl", function($scope, $http, $location) {
 	
 	$scope.goToEdit = function(id) {
 		$location.path("/records/edit/" + id);
+	}
+	
+	$scope.search = function() {
+		//console.log($scope.searchParams);
+		$scope.page = 0;
+		getRecords();
+	}
+	
+	$scope.changePage = function(direction) {
+		$scope.page = $scope.page + direction;
+		getRecords();
+	}
+	
+	$scope.fastSearch = function() {
+		$scope.searchParams.minimumDuration = 30;
+		$scope.page = 0;
+		getRecords();
 	}
 	
 });

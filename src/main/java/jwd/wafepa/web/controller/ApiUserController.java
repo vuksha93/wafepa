@@ -51,20 +51,23 @@ public class ApiUserController {
 			@RequestParam(defaultValue="0") int page,
 			@RequestParam(required=false) String email,
 			@RequestParam(required=false) String firstName,
-			@RequestParam(required=false) String lastName
+			@RequestParam(required=false) String lastName,
+			@RequestParam(required=false) String name
 			) {
 		
 		Page<User> usersPage = null;
 		List<User> users = null;
 		
-		if(email == null && firstName == null && lastName == null) {
+		if(email == null && firstName == null && lastName == null && name == null) {
 			usersPage = userService.findAll(page);
 		} else if(firstName != null) {
-			usersPage = userService.findByFirstname(firstName, page);
+			usersPage = userService.findByFirstName(firstName, page);
 		} else if(lastName != null) {
-			usersPage = userService.findByLastname(lastName, page);
+			usersPage = userService.findByLastName(lastName, page);
 		} else if(email != null) {
 			usersPage = userService.findByEmailContaining(email, page);
+		} else if(name != null) {
+			usersPage = userService.findByFirstNameContainingOrLastNameContaining(name, page);
 		}
 
 		if (usersPage != null) {
