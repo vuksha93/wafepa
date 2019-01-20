@@ -8,7 +8,7 @@
 		<version>1.2.7.RELEASE</version>
 	</parent>
 	<artifactId>lab2-begin</artifactId>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 	<name>WAFEPA</name>
 	<properties>
 		<main.basedir>${basedir}/../..</main.basedir>
